@@ -212,7 +212,7 @@ In GalleryItem.js,
 
 add the following code:
 
-
+![image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/R.png)
 
 
 Test it out:
