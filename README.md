@@ -244,8 +244,8 @@ Luckily, the <Link> tag from react-router-dom is set up to work a lot like a tra
 Add the following code to GalleryItem.js:
 
 
+![image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/z.png?raw=true)
 
-xxx
 And then test it out:
 ![image](https://digitalskills.instructure.com/courses/4083/files/1269740/download)
 
