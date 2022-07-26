@@ -176,30 +176,6 @@ function ArtistView() {
 }
 
 Click here to copy
-Now, let's test out our route by going to the path we have prescribed:
-
-
-![image from ThriveDX](https://digitalskills.instructure.com/courses/4083/files/1269764/download)
-
-This worked, excellent! We now have the ability to get a variable from the URL bar into our application code.
-
-Let's make sure to do the same thing to our AlbumView.js component while we are here. After all, it does work on the same principle.
-
-import { useParams } from 'react-router-dom'
-
-function AlbumView() {
-    const { id } = useParams()
-    const [ albumData, setAlbumData ] = useState([])
-
-    return (
-        <div>
-            <h2>The id passed was: {id}</h2>
-            <p>Album Data Goes Here!</p>
-        </div>
-    )
-}
-
-Click here to copy
 
 Now, let's test out our route by going to the path we have prescribed:
 
@@ -232,33 +208,19 @@ Why don't we simply prescribe an <a> tag with the path as our href?
 
 Let's prescribe a link to direct us to the URL of our ArtistView component and pass in the artist's unique ID as the parameters. Where might be the best place to put these links? We need it to be somewhere where the data is available for one given entry. Perhaps our detailView within GalleryItem.js would be good.
 
-In GalleryItem.js, add the following code:
+In GalleryItem.js,
 
-const detailView = () => {
-    return (
-        <div style={detailStyle}>
-            <h2>{props.item.trackName}</h2>
-            <h3>
-                <a href={`/artist/${props.item.artistId}`}>
-                    {props.item.artistName}
-                </a>
-            </h3>
-            <h3>
-                <a href={`/album/${props.item.collectionId}`}>
-                    {props.item.collectionName}
-                </a>
-            </h3>
-            <h4>{props.item.primaryGenreName}</h4>
-            <h4>{props.item.releaseDate}</h4>
-        </div>
-    )
-}
-Click here to copy
+add the following code:
+
+
+
 
 Test it out:
-![insert image](https://digitalskills.instructure.com/courses/4083/files/1269742/download)
+
+![insert image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/SD07-React-&-Redux-03.-React-Dataflow-Lesson-8-Code_Along.13.gif?raw=true)
 
 From: ThriveDX
+
 
 Well, that's not quite right, is it?
 
@@ -280,6 +242,9 @@ Now we have a little more insight into why we use <Link> tags with react-router-
 Luckily, the <Link> tag from react-router-dom is set up to work a lot like a traditional <a> tag, so this fix can be rather easy.
 
 Add the following code to GalleryItem.js:
+
+
+
 import { Link } from 'react-router-dom'
 
 ...
