@@ -230,7 +230,7 @@ Our application certainly gets us to where we wanted to go, there is no question
 
 Take a moment to inspect your component devtools when you click the link. Specifically, we want to be looking at the App-level state properties.
 
-![image](https://digitalskills.instructure.com/courses/4083/files/1269638/download)
+![image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/SD07-React-&-Redux-03.-React-Dataflow-Lesson-8-Code_Along.14.gif?raw=true)
 From: ThriveDX
 
 Well, there's the problem! When we navigate to the link, we are brought to a fresh render of our web page. And while it's not technically hurting very much for us to have state reset when we visit this component, it is not the behavior we were planning on and this can be considered a bug.
@@ -245,31 +245,7 @@ Add the following code to GalleryItem.js:
 
 
 
-import { Link } from 'react-router-dom'
-
-...
-
-const detailView = () => {
-    return (
-        <div style={detailStyle}>
-            <h2>{props.item.trackName}</h2>
-            <h3>
-                <Link to={`/artist/${props.item.artistId}`}>
-                    {props.item.artistName}
-                </Link>
-            </h3>
-            <h3>
-                <Link to={`/artist/${props.item.collectionId}`}>
-                    {props.item.collectionName}
-                </Link>
-            </h3>
-            <h4>{props.item.primaryGenreName}</h4>
-            <h4>{props.item.releaseDate}</h4>
-        </div>
-    )
-}
-
-Click here to copy
+xxx
 And then test it out:
 ![image](https://digitalskills.instructure.com/courses/4083/files/1269740/download)
 
