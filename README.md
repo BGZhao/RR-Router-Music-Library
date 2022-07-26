@@ -148,6 +148,8 @@ Great! We should now see our divs rendered to the screen. Now that we have the c
 
 Just like prescribing parameter values with an express server, we can define parameters inside of our URL string by using the ':' character.
 
+#### App.js
+
 return (
     <div>
     {message}
@@ -166,9 +168,9 @@ return (
     </div>
 )
 
-
-
 Click here to copy
+
+
 ![image](copy link)
 
 #### It can be helpful to visualize a router like a switchboard where only the address requested will be displayed by our app.
