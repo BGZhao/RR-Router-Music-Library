@@ -90,24 +90,55 @@ Click here to copy
 Return to your app.js file. Perform a quick check of the quality of your code by importing and rendering both components. While we are here, let's import the tools we need from react-router-dom:
 in the App.js file:
 
-// These components will be making separate API calls from the app
-// component to serve specific data about a given album
+import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Gallery from './components/Gallery'
+import SearchBar from './components/SearchBar'
+import AlbumView from './components/AlbumView'
+import ArtistView from './components/ArtistView'
 
-import { useState, useEffect } from 'react'
+function App() {
+    let [search, setSearch] = useState('')
+    let [message, setMessage] = useState('Search for Music!')
+    let [data, setData] = useState([])
 
-function AlbumView() {
-    const [ albumData, setAlbumData ] = useState([])
+    const API_URL = 'https://itunes.apple.com/search?term='
+
+    useEffect(() => {
+        if(search) {
+            const fetchData = async () => {
+                document.title = `${search} Music`
+                const response = await fetch(API_URL + search)
+                const resData = await response.json()
+                if (resData.results.length > 0) {
+                    return setData(resData.results)
+                } else {
+                    return setMessage('Not Found')
+                }
+            }
+            fetchData()
+        }
+    }, [search])
+    
+    const handleSearch = (e, term) => {
+        e.preventDefault()
+        setSearch(term)
+    }
 
     return (
         <div>
-            <p>Album Data Goes Here!</p>
+            <SearchBar handleSearch = {handleSearch}/>
+            {message}
+            <Gallery data={data} />
+            <AlbumView />
+            <ArtistView />
         </div>
-    )
+    );
 }
 
-export default AlbumView
-
+export default App;
 Click here to copy
+
 ## 4) Wrap the Router
 Great! We should now see our divs rendered to the screen. Now that we have the components we want to render displayed, let's pack the components into a Router then Routes so that we can render them selectively. To Place more than one component into an element, we use a Fragment to wrap the components.
 
@@ -138,28 +169,54 @@ return (
 
 
 Click here to copy
-From: ThriveDX
-It can be helpful to visualize a router like a switchboard where only the address requested will be displayed by our app.
+![image](copy link)
 
-5) Develop the Component
+#### It can be helpful to visualize a router like a switchboard where only the address requested will be displayed by our app.
+
+## 5) Develop the Component
 Excellent! Now that we have labelled the components with route paths, we can worry about the actual component behavior.
 
 First, let's test out our parameters feature. Add the below code to your AlbumView.js:
+import { useParams } from 'react-router-dom'
 
+function ArtistView() {
+    const { id } = useParams()
+    const [ artistData, setArtistData ] = useState([])
+
+    return (
+        <div>
+            <h2>The id passed was: {id}</h2>
+            <p>Artist Data Goes Here!</p>
+        </div>
+    )
+}
 
 Click here to copy
 Now, let's test out our route by going to the path we have prescribed:
 
 
-![image from ThriveDX](https://digitalskills.instructure.com/courses/4083/files/1269965/download)
+![image from ThriveDX](https://digitalskills.instructure.com/courses/4083/files/1269764/download)
 
 This worked, excellent! We now have the ability to get a variable from the URL bar into our application code.
 
 Let's make sure to do the same thing to our AlbumView.js component while we are here. After all, it does work on the same principle.
 
+import { useParams } from 'react-router-dom'
+
+function AlbumView() {
+    const { id } = useParams()
+    const [ albumData, setAlbumData ] = useState([])
+
+    return (
+        <div>
+            <h2>The id passed was: {id}</h2>
+            <p>Album Data Goes Here!</p>
+        </div>
+    )
+}
 
 Click here to copy
-6) Build Links
+## 6) Build Links
 Now that we have a way of getting parameters from our URL bar to our code, we just need to come up with a way to get our code to the URL bar. And manually typing every ID will not be an option.
 
 Why don't we simply prescribe an <a> tag with the path as our href?
@@ -168,22 +225,41 @@ Let's prescribe a link to direct us to the URL of our ArtistView component and p
 
 In GalleryItem.js, add the following code:
 
-
+const detailView = () => {
+    return (
+        <div style={detailStyle}>
+            <h2>{props.item.trackName}</h2>
+            <h3>
+                <a href={`/artist/${props.item.artistId}`}>
+                    {props.item.artistName}
+                </a>
+            </h3>
+            <h3>
+                <a href={`/album/${props.item.collectionId}`}>
+                    {props.item.collectionName}
+                </a>
+            </h3>
+            <h4>{props.item.primaryGenreName}</h4>
+            <h4>{props.item.releaseDate}</h4>
+        </div>
+    )
+}
 Click here to copy
-Test it out:
 
+Test it out:
+![insert image](https://digitalskills.instructure.com/courses/4083/files/1269742/download)
 
 From: ThriveDX
 
 Well, that's not quite right, is it?
 
 
-7) What Went Wrong
+## 7) What Went Wrong
 Our application certainly gets us to where we wanted to go, there is no question about that. However, if we watch carefully we can see a brief content flash. Did you notice it? Immediately after we click the link, we see a re-render of the blank app level.
 
 Take a moment to inspect your component devtools when you click the link. Specifically, we want to be looking at the App-level state properties.
 
-
+![image](https://digitalskills.instructure.com/courses/4083/files/1269638/download)
 From: ThriveDX
 
 Well, there's the problem! When we navigate to the link, we are brought to a fresh render of our web page. And while it's not technically hurting very much for us to have state reset when we visit this component, it is not the behavior we were planning on and this can be considered a bug.
@@ -191,22 +267,44 @@ Well, there's the problem! When we navigate to the link, we are brought to a fre
 Now we have a little more insight into why we use <Link> tags with react-router-dom. Let's go ahead and fix our code.
 
 
-8) Build Links: Part Two
+## 8) Build Links: Part Two
 Luckily, the <Link> tag from react-router-dom is set up to work a lot like a traditional <a> tag, so this fix can be rather easy.
 
 Add the following code to GalleryItem.js:
+import { Link } from 'react-router-dom'
 
+...
+
+const detailView = () => {
+    return (
+        <div style={detailStyle}>
+            <h2>{props.item.trackName}</h2>
+            <h3>
+                <Link to={`/artist/${props.item.artistId}`}>
+                    {props.item.artistName}
+                </Link>
+            </h3>
+            <h3>
+                <Link to={`/artist/${props.item.collectionId}`}>
+                    {props.item.collectionName}
+                </Link>
+            </h3>
+            <h4>{props.item.primaryGenreName}</h4>
+            <h4>{props.item.releaseDate}</h4>
+        </div>
+    )
+}
 
 Click here to copy
 And then test it out:
-
+![image](https://digitalskills.instructure.com/courses/4083/files/1269740/download)
 
 From: ThriveDX
 
 That's more like it!
 
 
-Looking Forward
+## Looking Forward
 At this point, our app is routing us to the pages we want to render, but our pages don't actually have any behavior.
 
 In the coming lesson, we will be refactoring our ArtistView and AlbumView pages to display data, and then we can polish our application up to feature smooth navigation.
