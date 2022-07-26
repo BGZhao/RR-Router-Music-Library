@@ -247,7 +247,7 @@ Add the following code to GalleryItem.js:
 ![image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/z.png?raw=true)
 
 And then test it out:
-![image](https://digitalskills.instructure.com/courses/4083/files/1269740/download)
+![image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/SD07-React-&-Redux-03.-React-Dataflow-Lesson-8-Code_Along.16.gif?raw=true)
 
 From: ThriveDX
 
