@@ -148,9 +148,10 @@ Great! We should now see our divs rendered to the screen. Now that we have the c
 
 Just like prescribing parameter values with an express server, we can define parameters inside of our URL string by using the ':' character.
 
-#### App.js
+ App.js
+ 
 
-return (
+  return (
     <div>
     {message}
         <Router>
@@ -168,10 +169,11 @@ return (
     </div>
 )
 
-Click here to copy
+  
+  Click here to copy
 
 
-![image](copy link)
+![image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/SD07-React-&-Redux-03.-React-Dataflow-Lesson-8-Code_Along.8.png?raw=true)
 
 #### It can be helpful to visualize a router like a switchboard where only the address requested will be displayed by our app.
 
