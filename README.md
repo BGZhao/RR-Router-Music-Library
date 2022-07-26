@@ -200,6 +200,31 @@ function AlbumView() {
 }
 
 Click here to copy
+
+Now, let's test out our route by going to the path we have prescribed:
+
+![Image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/SD07-React-&-Redux-03.-React-Dataflow-Lesson-8-Code_Along.10.png?raw=true)
+
+This worked, excellent! We now have the ability to get a variable from the URL bar into our application code.
+
+Let's make sure to do the same thing to our AlbumView.js component while we are here. After all, it does work on the same principle.
+
+
+import { useParams } from 'react-router-dom'
+
+function AlbumView() {
+    const { id } = useParams()
+    const [ albumData, setAlbumData ] = useState([])
+
+    return (
+        <div>
+            <h2>The id passed was: {id}</h2>
+            <p>Album Data Goes Here!</p>
+        </div>
+    )
+}
+
+
 ## 6) Build Links
 Now that we have a way of getting parameters from our URL bar to our code, we just need to come up with a way to get our code to the URL bar. And manually typing every ID will not be an option.
 
