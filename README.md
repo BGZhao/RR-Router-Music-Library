@@ -148,30 +148,10 @@ Great! We should now see our divs rendered to the screen. Now that we have the c
 
 Just like prescribing parameter values with an express server, we can define parameters inside of our URL string by using the ':' character.
 
- App.js
  
+  ![imagecode](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/Screen%20Shot%202022-07-26%20at%201.38.27%20PM.png)
 
-  return (
-    <div>
-    {message}
-        <Router>
-            <Routes>
-                <Route path="/" element={
-                    <Fragment>
-                        <SearchBar handleSearch = {handleSearch}/>
-                        <Gallery data={data} />
-                    </Fragment>
-                } />
-                <Route path="/album/:id" element={<AlbumView />} />
-                <Route path="/artist/:id" element={<ArtistView />} />
-            </Routes>
-        </Router>
-    </div>
-)
-
-  
-  Click here to copy
-
+ 
 
 ![image](https://github.com/BGZhao/RR-Router-Music-Library/blob/main/SD07-React-&-Redux-03.-React-Dataflow-Lesson-8-Code_Along.8.png?raw=true)
 
